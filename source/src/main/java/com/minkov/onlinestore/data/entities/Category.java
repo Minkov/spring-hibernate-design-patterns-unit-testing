@@ -1,4 +1,4 @@
-package com.minkov.onlinestore.entities;
+package com.minkov.onlinestore.data.entities;
 
 public class Category {
     private int id;

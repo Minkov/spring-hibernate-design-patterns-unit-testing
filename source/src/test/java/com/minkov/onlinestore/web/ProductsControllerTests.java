@@ -1,7 +1,7 @@
 package com.minkov.onlinestore.web;
 
 import com.minkov.onlinestore.data.base.Data;
-import com.minkov.onlinestore.entities.Product;
+import com.minkov.onlinestore.data.entities.Product;
 import org.junit.Assert;
 import org.junit.Test;
 

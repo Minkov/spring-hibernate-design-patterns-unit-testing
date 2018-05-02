@@ -1,10 +1,12 @@
-package com.minkov.onlinestore.entities;
+package com.minkov.onlinestore.data.entities;
+
+import com.minkov.onlinestore.data.entities.base.EntityModel;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Product {
+public class Product implements EntityModel {
     private int id;
     private String name;
     private int quantity;
