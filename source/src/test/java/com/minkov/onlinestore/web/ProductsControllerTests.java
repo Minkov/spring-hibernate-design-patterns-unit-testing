@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ProductsControllerTests {
-
     @Test
     public void getAll_returnMany_whenThereAreProducts() {
         List<Product> products = Arrays.asList(

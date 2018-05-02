@@ -3,6 +3,7 @@ package com.minkov.onlinestore.web;
 import com.minkov.onlinestore.data.base.Data;
 import com.minkov.onlinestore.entities.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ public class ProductsController {
         this.data = data;
     }
 
+    @CrossOrigin(origins = "http://localhost:8081")
     @RequestMapping
     public List<Product> getProducts() {
         return data.getProducts();
