@@ -1,15 +1,6 @@
 # Skills
 
-- Inheritance
-
-- Abstraction, interfaces
-
-- Annotations
-
-- Controllers
-
-- Static methods
-
-- Exceptions
-
+- Unit testing
+- Dependency injection 101
+- Isolation techniques
 
