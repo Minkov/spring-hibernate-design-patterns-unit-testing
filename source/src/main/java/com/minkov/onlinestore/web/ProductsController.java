@@ -1,7 +1,8 @@
 package com.minkov.onlinestore.web;
 
-import com.minkov.onlinestore.data.InMemoryData;
+import com.minkov.onlinestore.data.base.Data;
 import com.minkov.onlinestore.entities.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,11 +12,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products")
 public class ProductsController {
+    private final Data data;
 
-    private final InMemoryData data;
-
-    public ProductsController() {
-        this.data = new InMemoryData();
+    @Autowired
+    public ProductsController(Data data) {
+        this.data = data;
     }
 
     @RequestMapping

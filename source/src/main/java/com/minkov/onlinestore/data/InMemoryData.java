@@ -2,11 +2,13 @@ package com.minkov.onlinestore.data;
 
 import com.minkov.onlinestore.data.base.Data;
 import com.minkov.onlinestore.entities.Product;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class InMemoryData implements Data {
 
     private static List<Product> products;
