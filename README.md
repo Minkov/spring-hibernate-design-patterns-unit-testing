@@ -1,0 +1,1 @@
+# spring-hibernate-design-patterns-unit-testing
