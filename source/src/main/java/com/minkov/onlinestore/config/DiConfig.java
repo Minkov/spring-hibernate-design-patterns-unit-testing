@@ -1,21 +1,25 @@
 package com.minkov.onlinestore.config;
 
+import com.minkov.onlinestore.data.entities.Product;
+import com.minkov.onlinestore.data.repositories.HibernateRepository;
+import com.minkov.onlinestore.data.repositories.base.GenericRepository;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 @Configuration
 public class DiConfig {
     @Bean
-    public Connection provideConnection() throws SQLException, ClassNotFoundException {
-        // test if jdbc driver is available
-        Class.forName("com.mysql.jdbc.Driver");
+    public SessionFactory provideSessionFactory() {
+        return HibernateUtils.getSessionFactory();
+    }
 
-        Connection con = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/onlinemarketdb", "root", "");
-        return con;
+    @Bean
+    @Autowired
+    public GenericRepository<Product> provideProductsRepository(SessionFactory sessionFactory) {
+        HibernateRepository<Product> repository = new HibernateRepository<>(sessionFactory);
+        repository.setEntityModelClass(Product.class);
+        return repository;
     }
 }

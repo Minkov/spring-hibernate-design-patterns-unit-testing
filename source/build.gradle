@@ -25,7 +25,9 @@ repositories {
 
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'mysql:mysql-connector-java:5.1.6'
+    compile 'org.hibernate:hibernate-core:5.2.16.Final'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

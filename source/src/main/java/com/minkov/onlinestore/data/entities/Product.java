@@ -1,26 +1,42 @@
 package com.minkov.onlinestore.data.entities;
 
+import com.minkov.onlinestore.data.entities.Category;
 import com.minkov.onlinestore.data.entities.base.EntityModel;
 
-import java.math.BigDecimal;
+import javax.persistence.*;
+import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+@Entity
+@Table(name = "products")
 public class Product implements EntityModel {
-    private int id;
-    private String name;
-    private int quantity;
-    private BigDecimal price;
+    int id;
+    String name;
+    float price;
+    int quantity;
     private Set<Category> categories;
 
-    public Product(int id, String name, int quantity, BigDecimal price) {
+    public Product() {
+
+    }
+
+    public Product(String name, float price, int quantity) {
+        this(-1, name, price, quantity);
+    }
+
+    public Product(int id, String name, float price, int quantity) {
         setId(id);
         setName(name);
-        setQuantity(quantity);
         setPrice(price);
+        setQuantity(quantity);
         setCategories(new HashSet<Category>());
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -29,6 +45,7 @@ public class Product implements EntityModel {
         this.id = id;
     }
 
+    @Column(name = "name", length = 25, nullable = false)
     public String getName() {
         return name;
     }
@@ -37,6 +54,16 @@ public class Product implements EntityModel {
         this.name = name;
     }
 
+    @Column(name = "price", nullable = false)
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    @Column(name = "quantity", nullable = false)
     public int getQuantity() {
         return quantity;
     }
@@ -45,23 +72,32 @@ public class Product implements EntityModel {
         this.quantity = quantity;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    @Override
+    public String toString() {
+        return MessageFormat.format(
+            "({0}, {1}, {2}, {3}, {4})",
+            getId(),
+            getName(),
+            getPrice(),
+            getQuantity(),
+            getCategories()
+                .stream()
+                .map(Category::toString)
+                .collect(Collectors.joining(", "))
+        );
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "products_categories",
+        joinColumns = {@JoinColumn(name = "product_id")},
+        inverseJoinColumns = {@JoinColumn(name = "category_id")}
+    )
     public Set<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(HashSet<Category> categories) {
+    public void setCategories(Set<Category> categories) {
         this.categories = categories;
-    }
-
-    public void addCategory(Category category) {
-        this.categories.add(category);
     }
 }
